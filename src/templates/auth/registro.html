@@ -1,0 +1,117 @@
+{% extends './base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+    <a class="navbar-brand" href="/">
+         <img class="mb-4" src="{{ url_for('static', filename='img/logoude.png') }}" alt=""  width="350" height="200">
+    </a>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <div class="wrapper">
+        <div class="title">Registro</div>
+            <br>
+            <form name="formRegisterClient" id="formRegisterClient" action="{{ url_for('registerUser') }}" method="POST" class="mt-5" autocomplete="off">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Primer Nombre</label>
+                        <input type="text" name="nombre" class="form-control" autofocus required>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Primer Apellido</label>
+                        <input type="text" name="apellido" class="form-control" required>
+                    </div>
+                </div>
+            
+                <div class="mb-6">
+                    <label for="email" class="form-label mt-3">Correo</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="telefono" class="form-label mt-3">Telefono</label>
+                    <input type="number" name="telefono" class="form-control" required>
+                </div>
+            
+                <div class="row">
+                    <div class="mb-6">
+                        <label for="password" class="form-label mt-4">Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" name="password" id="password" class="form-control" required="true">
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="password" data-eye="eye-icon-password">
+                                <i class="far fa-eye" id="eye-icon-password"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="confirmPassword" class="form-label mt-4">Repetir Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required="true">
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="confirmPassword" data-eye="eye-icon-confirmPassword">
+                                <i class="far fa-eye" id="eye-icon-confirmPassword"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 mt-3 mb-3">
+                    <input type="submit" class="btn btn-primary btn-send" id="sendForm" value="Crear Ahora!">
+                </div>
+            
+                <div class="mb-12">
+                    <span>
+                        Ya tengo cuenta, 
+                    </span>
+                    
+                    <a href="/login" style="color: #555;" class="volverViewLogin">
+                        <i class="bi bi-arrow-left-short"></i>
+                        Volver
+                    </a>
+            
+                </div>
+            </form>
+
+    </div>
+    
+    <script>
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+        
+        togglePasswordButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = this.getAttribute('data-target');
+                const targetInput = document.getElementById(targetId);
+                
+                const eyeIconId = this.getAttribute('data-eye');
+                const eyeIcon = document.getElementById(eyeIconId);
+    
+                const type = targetInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                targetInput.setAttribute('type', type);
+    
+                // Cambiar el ícono del ojo
+                if (type === 'password') {
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
+   
+{% endblock %}

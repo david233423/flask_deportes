@@ -1,0 +1,60 @@
+{% extends './base2.html' %}
+
+{% block title %}{{ juego.nombre }}{% endblock %}
+
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Lista de Inscritos {{ juego.nombre }}</h1>
+</header>
+<br>
+<div  id="botones5">
+    <a class="btn btn-success" href="{{ url_for('exportar_pdf', juego_id=juego.id) }}" target="_blank">
+        Exportar en PDF
+    </a>
+
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Código</th>
+                <th>Semestre</th>
+                <th>Carrera</th>
+                <th>Telefono</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inscrito in inscritos %}
+                <tr>
+                    <td>{{ inscrito.registro.nombre }}</td>
+                    <td>{{ inscrito.registro.apellido }}</td>
+                    <td>{{ inscrito.codigo }}</td>
+                    <td>{{ inscrito.semestre }}</td>
+                    <td>{{ inscrito.carrera }}</td>
+                    <td>{{ inscrito.registro.telefono }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <span>
+        {{ pagination.info }}
+        <hr />
+      </span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >
+      {{ pagination.links }}
+    </div>
+</div>
+{% endblock %}

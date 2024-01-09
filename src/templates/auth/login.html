@@ -1,0 +1,82 @@
+{% extends './base.html' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+{% endblock %}
+
+
+
+{% block body %}
+    <a class="navbar-brand" href="/">
+        <img class="mb-4" src="{{ url_for('static', filename='img/logoude.png') }}" alt="" width="350" height="200">
+    </a>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    
+    <div class="wrapper">
+        <div class="title">Inicio de Sesión</div>
+        <br>
+        <form action="{{ url_for('loginUser') }}" method="POST" autocomplete="off">
+            <div class="mb-6">
+                <label for="email" class="form-label">Escribe tu Correo</label>
+                <input type="email" name="email" id="email" class="form-control" required="true">
+            </div>
+
+            <div class="mb-6">
+                <label for="password" class="form-label mt-4">Escribe tu Contraseña</label>
+                <div class="input-group">
+                    <input type="password" name="password" id="password" class="form-control" required="true">
+                    <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                        <i class="far fa-eye" id="eye-icon"></i>
+                    </button>
+                </div>
+            </div>
+        
+            <div class="d-grid gap-2 mt-3 mb-3">
+                <button type="submit" class="btn btn-primary btn-send">Entrar Ahora!</button>
+            </div>
+        
+            <div class="mb-12">
+                <span>
+                    No tienes Cuenta?
+                </span>
+                <a href="/registro" id="link_sign_up" class="createUser">
+                    Crear cuenta
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        const passwordInput = document.getElementById('password');
+        const togglePasswordButton = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eye-icon');
+    
+        togglePasswordButton.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+    
+            // Cambiar el ícono del ojo
+            if (type === 'password') {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+                
+            } else {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+    </script>
+{% endblock %}

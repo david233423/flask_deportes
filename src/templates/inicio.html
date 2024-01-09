@@ -1,0 +1,143 @@
+
+{% extends './base3.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+  <h1 id="header1">DEPORTES UDENAR</h1>
+</header><br>
+
+<br>
+<div id="carouselExampleDark" class="carousel carousel-dark slide" style="width: 70%;" height="250px" >
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" width="100px">
+      <div class="carousel-item active" data-bs-interval="1000">
+        <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2021/01/udenar-1068x641.png" class="d-block w-100" alt="..." width="50px" height="500px">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Udenar</h5>
+          <p>En la universidad de nariño fomentamos el deporte </p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2022/06/img_destacada.jpeg" class="d-block w-100" alt="..." width="100px" height="500px">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>El deporte es salud y vida</h5>
+          <p>Se participe de un cambio</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="1000">
+        <img src="https://periodico.udenar.edu.co/wp-content/uploads/2022/12/1.png" class="d-block w-100" alt="..." width="100px" height="500px">
+        <div class="carousel-caption d-none d-md-block">
+          <h5></h5>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div> 
+
+  <div class="card mb-3">
+    <div  class="card-body"><br><br>
+      <h5 id="tituloh" class="card-title">DEPORTES UDENAR</h5><br>
+      <p id="titulop" class="card-text"><b> Regístrate hoy, y únete a la vibrante comunidad deportiva de la Universidad de Nariño. Juntos, haremos historia en el mundo del deporte universitario. ¡La revolución comienza contigo!</b></p>
+    </div>
+  </div><br><br>
+
+  <div class="container">
+    <div class="grid text-center">
+      <div class="g-col-6 g-col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2022/04/imagen_destacada-26.jpeg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 id="cards1" class="card-title">Registro Rápido y Sencillo</h5>
+            <p class="card-text">¿Quieres ser parte de la acción? Nuestro proceso de registro es rápido, fácil y te da acceso instantáneo a un mundo de eventos. No pierdas tiempo; únete y comienza a vivir la experiencia            </p>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div class="g-col-6 g-col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2016/11/Deportes-proyecci%C3%B3n-1.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 id="cards1" class="card-title">Regístrate en los Eventos Universitarios</h5>
+            <p class="card-text">¡Forma parte de la tradición deportiva de nuestra universidad! Regístrate en los eventos deportivos, desde competiciones interfacultades hasta actividades recreativas. Tu participación es la clave del espíritu universitario.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-col-6 g-col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img src="https://periodico.udenar.edu.co/wp-content/uploads/2022/07/WhatsApp-Image-2022-07-26-at-9.37.56-AM.jpeg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 id="cards1" class="card-title">Conecta con Tu Comunidad Deportiva Universitaria</h5>
+            <p class="card-text">Estrecha lazos con compañeros apasionados por el deporte. Visualiza eventos, conoce a otros estudiantes deportistas y participa en actividades que fortalecen la comunidad universitaria.</p>
+          </div>
+        </div>
+      </div>
+    </div><br><br><br>
+
+
+
+
+
+    <div class="grid text-center">
+
+      <div class="g-col-6 g-col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2021/08/Banner-Reencuentro-Universitario-Deportes.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 id="cards1"class="card-title">Registro en Tiempo Real para Eventos Universitarios</h5>
+            <p class="card-text">Sé el primero en asegurar tu participación. Con nuestro sistema de registro en tiempo real, no te perderás ninguna competencia o evento universitario. ¡Haz historia con tu presencia!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-col-6 g-col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2016/11/Actividades-complementarias-.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 id="cards1" class="card-title">Siente el Poder del Deporte Universitario</h5>
+            <p class="card-text">En la Universidad de Nariño, el deporte es más que competición; es una experiencia. Siente el poder del deporte universitario con nuestra plataforma, diseñada para enriquecer tu vida estudiantil.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="g-col-6 g-col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img src="https://www.udenar.edu.co/recursos/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-20-at-1.12.12-PM.jpeg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 id="cards1" class="card-title">Descubre el Espíritu Deportivo de la Universidad de Nariño</h5>
+            <p class="card-text">Sumérgete en el emocionante mundo de los deportes universitarios con nuestra plataforma. Descubre y visualiza todos los eventos deportivos de la Universidad de Nariño en un solo lugar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+    
+
+{% endblock %}
+

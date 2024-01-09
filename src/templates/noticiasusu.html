@@ -1,0 +1,66 @@
+{% extends './base4.html' %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Últimas Noticias</h1>
+</header>
+
+<div class="row" id="cont">
+    <div class="col-md-2" id="article" style="margin-bottom: 20px;" >
+        <!-- Contenido del segundo div -->
+        <h2><i class="fas fa-soccer"></i>No te pierda de las ultimas noticias</h2>
+        <p>Deportes Udenar</p>
+        <img src="https://th.bing.com/th/id/R.8ee2035b54ce980a066b426189b050e1?rik=V1OAl0pDRoxmrQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f-U2WEIOQ4Ieo%2fUaUQ51QLi7I%2fAAAAAAAADfg%2fgUD44UindOw%2fs1600%2fPARTIDO%2b3.JPG&ehk=mZDx73AD99vuHU1awmA2A6WRUwsrD%2fCYZ8gSqq7u%2b%2bA%3d&risl=&pid=ImgRaw&r=0" alt="Imagen de la noticia 1" width="400px" height="200px">
+        <p>Incribite a los diferentes juegos  </p>
+     </div>
+
+     {% for noticia in noticias %}
+     <div class="col-md-8" id="article2" >
+         <h2><i class="fas fa-trophy"></i> {{ noticia.titulo }}</h2>
+         <p>Fecha de publicación: <p>{{ noticia.fecha_publicacion }}</p></p>
+         {% with urlnoticia = '/static/assets/fotos_juego/' %}
+             {% if(noticia.foto !="") %}
+             <img src="{{ urlnoticia }}{{ noticia.imagen }}" class="img-fluid rounded-start" style="max-width: 400px;"alt="...">
+             {% else %}
+             <img src="{{ urlnoticia }}sin_foto.jpg" class="img-fluid rounded-start" style="max-width: 400px;" alt="...">
+             {% endif %}
+         {% endwith %}
+         <p>{{ noticia.descripcion }}</p>
+         <a href="/eventosusu" class="btn">Quiero participar</a>
+     </div>
+ {% endfor %}
+
+ <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <span>
+        {{ pagination.info }}
+        <hr />
+      </span>
+      {{ pagination.links }}
+    </div>
+  </div>
+
+    <div id="miDivFijo">
+         <!-- Contenido del segundo div -->
+         <h2><i class="fas fa-soccer"></i>Juega y Disfruta</h2>
+         <p>Deportes Udenar</p>
+         <img src="https://th.bing.com/th/id/R.8ee2035b54ce980a066b426189b050e1?rik=V1OAl0pDRoxmrQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f-U2WEIOQ4Ieo%2fUaUQ51QLi7I%2fAAAAAAAADfg%2fgUD44UindOw%2fs1600%2fPARTIDO%2b3.JPG&ehk=mZDx73AD99vuHU1awmA2A6WRUwsrD%2fCYZ8gSqq7u%2b%2bA%3d&risl=&pid=ImgRaw&r=0" alt="Imagen de la noticia 1" width="400px" height="200px">
+         <p>Incribite a los diferentes juegos  </p>
+      </div>
+
+   
+
+</div>
+<br><br><br><br>
+<footer>
+    &copy; 2023 - Sitio de Noticias
+</footer>
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends './base2.html' %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Últimas Noticias</h1>
+</header>
+<br>
+
+<div  id="botones3">
+    <button  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarNoticiaModal">
+        Agregar noticiass
+    </button>
+</div>
+<br>
+<div class="modal fade" id="agregarNoticiaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/agregar_noticia" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Noticia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Titulo Noticia</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    </div>
+                
+                
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                    </div>
+                </div>
+                <div>
+                    {% include 'taiw.html' %}
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Agregar Noticia</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="cont">
+    <div class="col-md-2" id="article" style="margin-bottom: 20px;" >
+        <!-- Contenido del segundo div -->
+        <h2><i class="fas fa-soccer"></i>No te pierda de las ultimas noticias</h2>
+        <p>Deportes Udenar</p>
+        <img src="https://radcolombia.org/web/sites/default/files/archivos/instituciones/universidad-narino/logo-udenar.png" alt="Imagen de la noticia 1" width="400px" height="200px">
+        <p>Incribite a los diferentes juegos  </p>
+    </div>
+
+     {% for noticia in noticias %}
+        <div class="col-md-8" id="article2" >
+            <h2><i class="fas fa-trophy"></i> {{ noticia.titulo }}</h2>
+            <p>Fecha de publicación: <p>{{ noticia.fecha_publicacion }}</p></p>
+            {% with urlnoticia = '/static/assets/fotos_juego/' %}
+                {% if(noticia.foto !="") %}
+                <img src="{{ urlnoticia }}{{ noticia.imagen }}" class="img-fluid rounded-start" style="max-width: 400px;"alt="...">
+                {% else %}
+                <img src="{{ urlnoticia }}sin_foto.jpg" class="img-fluid rounded-start" style="max-width: 400px;" alt="...">
+                {% endif %}
+            {% endwith %}
+            <p>{{ noticia.descripcion }}</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarNoticiaModal{{ noticia.id }}">
+                Editar
+            </button>                    
+            <button type="button" class="btn btn-danger" onclick="eliminarEvento(event, '{{ url_for('eliminar_noticia', id=noticia.id) }}')">
+                Eliminar
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <span>
+            {{ pagination.info }}
+            <hr />
+          </span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >
+          {{ pagination.links }}
+        </div>
+      </div>
+
+    <div id="miDivFijo">
+         <!-- Contenido del segundo div -->
+         <h2><i class="fas fa-soccer"></i>Juega y Disfruta</h2>
+         <p>Deportes Udenar</p>
+         <img src="https://th.bing.com/th/id/R.8ee2035b54ce980a066b426189b050e1?rik=V1OAl0pDRoxmrQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f-U2WEIOQ4Ieo%2fUaUQ51QLi7I%2fAAAAAAAADfg%2fgUD44UindOw%2fs1600%2fPARTIDO%2b3.JPG&ehk=mZDx73AD99vuHU1awmA2A6WRUwsrD%2fCYZ8gSqq7u%2b%2bA%3d&risl=&pid=ImgRaw&r=0" alt="Imagen de la noticia 1" width="400px" height="200px">
+         <p>Incribite a los diferentes juegos  </p>
+      </div>
+
+      {% for noticia in noticias %}
+      <!-- Modal de edición para cada juego -->
+      <div class="modal fade" id="editarNoticiaModal{{ noticia.id  }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <form action="{{ url_for('editar_noticia', id=noticia.id )  }}" method="POST">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Editar Noticia</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="titulo" class="form-label">Titulo Noticia</label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" value="{{ noticia.titulo }}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripcion</label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ noticia.descripcion }}" required>
+                            </div>
+                            <div>
+                                {% include 'noticiaedit.html' %}
+                            </div>
+
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+{% endfor %}
+
+</div>
+<br>
+<footer>
+    &copy; 2023 - Sitio de Noticias
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function eliminarEvento(event, url) {
+            event.preventDefault();
+    
+            Swal.fire({
+                title: '¿Confirma la eliminación de la noticia?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#20c997',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Confirmar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if ('error' in data) {
+                            Swal.fire('Error', data.error, 'error');
+                        } else {
+                            Swal.fire('¡Eliminado!', data.message, 'success')
+                            .then(() => {
+                                // Redirige a la página principal o realiza otras acciones necesarias
+                                window.location.href = "{{ url_for('noticias') }}";
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Error', 'Hubo un problema al eliminar la noticia', 'error');
+                    });
+                }
+            });
+        }
+    </script>
+{% endblock %}

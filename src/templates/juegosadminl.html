@@ -1,0 +1,54 @@
+{% extends './base2.html' %}
+
+{% block title %}Inscritos{% endblock %}
+
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Inscritos</h1>
+</header>
+
+<div class="container">
+    <h1>Listado de juegos</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre del juego</th>
+                <th>Fecha</th>
+                <th>Hora Inicio</th>
+                <th>Hora Fin</th>
+                <th>Ver</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for juego in juegos %}
+                <tr>
+                    <td>{{juego.nombre}}</a></td>
+                    <td>{{juego.fecha}}</td>
+                    <td>{{juego.horai }}</td>
+                    <td>{{juego.horaf }}</td>
+                    <td><a href="{{ url_for('inscritos_juegoa', id=juego.id) }}" > <i class="fas fa-eye"></i> </a></td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <span>
+        {{ pagination.info }}
+        <hr />
+      </span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >
+      {{ pagination.links }}
+    </div>
+</div>
+{% endblock %}

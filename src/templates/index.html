@@ -1,0 +1,179 @@
+{% extends './base2.html' %}
+
+{% block title %}Eventos{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<header>
+    <h1 id="header1">Eventos Udenar</h1>
+</header>
+
+<div class="container" id="tres">
+    
+    <h1>Agregar un Juego</h1>
+    <!-- Botón para abrir el modal -->
+    <div  id="botones">
+        <a  class="btn btn-success" href="/juego">
+            Agregar Juego
+        </a>
+        <!-- Agregar botón "Inscribirme" -->
+        <a class="btn btn-secondary"  href="/juegosadminl">
+            Listado de juegos
+        </a>
+    </div>
+    <br> <br>
+    <!-- Modal -->
+   
+    
+    {% for juego in juegos %}
+        <div class="card mb-3" style="max-width: 1300px;" id="card">
+            <div class="row g-0">
+            <div class="col-md-4">
+                {% with urljuego = '/static/assets/fotos_juego/' %}
+                        {% if(juego.foto !="") %}
+                        <img src="{{ urljuego }}{{ juego.imagen }}" class="img-fluid rounded-start" style="max-width: 400px;"alt="...">
+                        {% else %}
+                        <img src="{{ urljuego }}sin_foto.jpg" class="img-fluid rounded-start" style="max-width: 400px;" alt="...">
+                        {% endif %}
+                {% endwith %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ juego.nombre }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Organizador: {{juego.registro.nombre}}</h5>
+                    <h6>Cupos:</h6>
+                    <p class="card-text">{{ juego.cupos }}</p>
+                    <h6>Hora Inicio:</h6>
+                    <p class="card-text">{{ juego.horai }}</p>
+                    <h6>Hora Fin:</h6>
+                    <p class="card-text">{{ juego.horaf }}</p>
+                    <h6>Fecha:</h6>
+                    <p class="card-text">{{ juego.fecha }}</p>
+                    <h6>Lugar:</h6>
+                    <p class="card-text">{{ juego.lugar.nombre }}</p>
+                    <p class="card-text">{{ juego.descripcion }}</p>
+                    <a href="{{ url_for('editar_juego', id=juego.id) }}" class="btn btn-primary">
+                        Editar
+                    </a>                    
+                    <button type="button" class="btn btn-danger" onclick="eliminarEvento(event, '{{ url_for('eliminar_juego', id=juego.id) }}')">
+                        Eliminar
+                    </button>
+                    
+
+                </div>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function eliminarEvento(event, url) {
+            event.preventDefault();
+    
+            Swal.fire({
+                title: '¿Confirma la eliminación del Juego?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#20c997',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Confirmar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if ('error' in data) {
+                            Swal.fire('Error', data.error, 'error');
+                        } else {
+                            Swal.fire('¡Eliminado!', data.message, 'success')
+                            .then(() => {
+                                // Redirige a la página principal o realiza otras acciones necesarias
+                                window.location.href = "{{ url_for('index') }}";
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Error', 'Hubo un problema al eliminar el juego', 'error');
+                    });
+                }
+            });
+        }
+    </script>
+    
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <span>
+            {{ pagination.info }}
+            <hr />
+          </span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >
+          {{ pagination.links }}
+        </div>
+      </div>
+
+
+        
+   <!-- Modal de inscripción -->
+    <div class="modal fade" id="inscribirmeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ url_for('inscribirme') }}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inscripción</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido:</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="codigo" class="form-label">Código:</label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="semestre" class="form-label">Semestre:</label>
+                            <input type="number" class="form-control" id="semestre" name="semestre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="carrera" class="form-label">Carrera:</label>
+                            <input type="text" class="form-control" id="carrera" name="carrera" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="juego_id" class="form-label">Seleccionar un Juego:</label>
+                            <select class="form-select" id="juego_id" name="juego_id">
+                                {% for juego in juegos %}
+                                    <option value="{{ juego.id }}">{{ juego.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Inscribirme</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+

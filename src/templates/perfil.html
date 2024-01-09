@@ -1,0 +1,38 @@
+{% extends './base2.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Perfil de Administrador</h1>
+</header>
+
+<section>
+    <div class="profile-img">
+        <div class="user-initial">{{ dataLogin.nombre[0] }}  {{ dataLogin.apellido[0] }} </div>
+        <div class="connection-dot"></div>
+    </div>
+    <div class="user-details">
+        <h1>{{ dataLogin.nombre }} {{ dataLogin.apellido }}</h1>
+        <p>{{ dataLogin.emailLogin }}</p>
+    </div>
+    <div class="social-links">
+        <div class="container" style="display: flex; justify-content: space-between;">
+            <div>
+                {% for link in enlaces %}
+                    <a href="{{ link['url'] }}" target="_blank"><i class="{{ link['icon_class'] }}"></i></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

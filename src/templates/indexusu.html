@@ -1,0 +1,156 @@
+{% extends './base4.html' %}
+
+{% block title %}Eventos{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<header>
+    <h1 id="header1">Eventos Udenar</h1>
+</header>
+<br><br>
+
+<div class="container" id="tres">
+    
+    <!-- Botón para abrir el modal -->
+    <div  id="botones2">
+        <!-- Agregar botón "Inscribirme" -->
+        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inscribirmeModal">
+            Inscribirme
+        </a>
+        <a class="btn btn-secondary"  href="/juegosusul">
+            Listado de juegos
+        </a>
+    </div>
+    <br> <br>
+    
+    
+    {% for juego in juegos %}
+        <div class="card mb-3" style="max-width: 1300px;" id="card">
+            <div class="row g-0">
+            <div class="col-md-4">
+                {% with urljuego = '/static/assets/fotos_juego/' %}
+                        {% if(juego.foto !="") %}
+                        <img src="{{ urljuego }}{{ juego.imagen }}" class="img-fluid rounded-start" style="max-width: 400px;"alt="...">
+                        {% else %}
+                        <img src="{{ urljuego }}sin_foto.jpg" class="img-fluid rounded-start" style="max-width: 400px;" alt="...">
+                        {% endif %}
+                {% endwith %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ juego.nombre }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Organizador: {{juego.registro.nombre}}</h5>
+                    <h6>Cupos:</h6>
+                    <p class="card-text">{{ juego.cupos }}</p>
+                    <h6>Hora Inicio:</h6>
+                    <p class="card-text">{{ juego.horai }}</p>
+                    <h6>Hora Fin:</h6>
+                    <p class="card-text">{{ juego.horaf }}</p>
+                    <h6>Fecha:</h6>
+                    <p class="card-text">{{ juego.fecha }}</p>
+                    <h6>Lugar:</h6>
+                    <p class="card-text">{{ juego.lugar.nombre }}</p>
+                    <p class="card-text">{{ juego.descripcion }}</p>
+                    
+                </div>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <span>
+            {{ pagination.info }}
+            <hr />
+          </span>
+          {{ pagination.links }}
+        </div>
+      </div>
+
+
+
+        
+   <!-- Modal de inscripción -->
+    <div class="modal fade" id="inscribirmeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="inscripcionForm" action="{{ url_for('inscribirme') }}" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Inscripción</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="codigo" class="form-label">Código:</label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="semestre" class="form-label">Semestre:</label>
+                            <input type="number" class="form-control" id="semestre" name="semestre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="carrera" class="form-label">Carrera:</label>
+                            <input type="text" class="form-control" id="carrera" name="carrera" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="juego_id" class="form-label">Seleccionar un Juego:</label>
+                            <select class="form-select" id="juego_id" name="juego_id">
+                                {% for juego in juegos %}
+                                    <option value="{{ juego.id }}">{{ juego.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="btnInscribirme">Inscribirme</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega esto al final de tu archivo HTML -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Manejar el formulario de inscripción
+        $("#inscripcionForm").submit(function (event) {
+            event.preventDefault(); // Evitar que se envíe el formulario de forma predeterminada
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('inscribirme') }}",
+                data: $(this).serialize(),
+                success: function (response) {
+                    // Verificar si la inscripción fue exitosa
+                    if (response.hasOwnProperty("message")) {
+                        alert(response.message);
+                        $("#inscribirmeModal").modal("hide"); // Cerrar el modal si la inscripción es exitosa
+
+                        location.reload();
+                    } else {
+                        // Mostrar el mensaje de error si la inscripción no fue exitosa
+                        alert(response);
+                    }
+                },
+                error: function (error) {
+                    // Mostrar el mensaje de error en una alerta o en algún otro lugar de la interfaz de usuario
+                    alert("Error al intentar inscribirse: " + error.responseText);
+                },
+            });
+        });
+    });
+</script>
+
+
+
+{% endblock %}

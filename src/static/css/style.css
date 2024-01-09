@@ -1,0 +1,318 @@
+*{
+    margin-top: 0%;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI';
+    max-width: 1550px;
+}
+html,body{
+    display: grid;
+    height: 100%;
+    width:100% ;
+    place-items: center;
+    background: linear-gradient(-135 deg, #f5f5f5, #fcfcfc);
+    background-image: url(static/img/fondo.jpeg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+header{
+    
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(9,121,11,1) 30%, rgba(19,78,20,1)  92%);
+    border-radius: 40px;
+}
+
+.nav-link {
+    text-decoration: none;
+    padding: 4px;
+    display: inline-block;
+    color: #141414;
+    border-radius: 15px;
+}
+
+.nav-link:hover {
+    background-color: #2f5d39;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.nav-item:nth-child(1) .nav-link {
+    color: #2a522a; 
+    font-size: 20px;
+
+}
+
+.nav-item:nth-child(1) .nav-link:hover {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.nav-item:nth-child(2) .nav-link {
+    color: #2a522a;
+    font-size: 20px;
+
+}
+
+.nav-item:nth-child(2) .nav-link:hover {
+    color: #ffffff;
+    font-size: 20px;    
+}
+
+.nav-item:nth-child(3) .nav-link {
+    color: #2a522a;
+    font-size: 20px;
+
+}
+
+.nav-item:nth-child(3) .nav-link:hover {
+    color: #ffffff;
+    font-size: 20px;    
+}
+
+.nav-item:nth-child(4) .nav-link {
+    color: #2a522a;
+    font-size: 20px;
+
+}
+
+.nav-item:nth-child(4) .nav-link:hover {
+    color: #ffffff;
+    font-size: 20px;    
+}
+
+.nav-item:nth-child(5) .nav-link {
+    color: #2a522a;
+    font-size: 20px;
+
+}
+
+.nav-item:nth-child() .nav-link:hover {
+    color: #ffffff;
+    font-size: 20px;    
+}
+
+.errors {
+    color: red;
+  }
+  
+
+
+
+#header1{
+    color: white;
+    font-family: 'Lora', serif;
+
+
+}
+::selection{
+    background: #4158d0;
+    color: #fff;
+}
+
+.wrapper{
+    width: 380px;
+    background: #fff;
+    border-radius: 35px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1); 
+}
+
+.wrapper .title{
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 100px;
+    color: #fff;
+    user-select: none;
+    border-radius: 15px 15px 0 0;
+    background: linear-gradient(-135deg, #0e5526, #0c0c0c);
+}
+
+.wrapper form{
+    padding: 10px 30px 50px 30px;
+}
+.wrapper form .field{
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+}
+
+.wrapper form .field input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-size: 17px;
+    padding-left: 20px;
+    border: 1px solid rgb(146, 142, 142);
+    border-radius: 35px;
+    transition: all 0.3s ease;
+}
+
+.wrapper form .field input:focus,
+form .field input:valid{
+    border-color: #0e5526;
+}
+
+.wrapper form .field label{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    color: #999999;
+    font-weight: 400;
+    font-size: 17px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+/* Estilo para el botón con el id "miBoton" */
+#miBoton {
+    background-color: #0e5526;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* Estilo al pasar el cursor por encima del botón */
+#miBoton:hover {
+    background-color: #0e5526;
+}
+
+#uno{
+    margin-right: 250px;
+}
+
+#dos {
+    background-color: #0e5526;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+#searchForm{
+    margin-left: 800px;
+}
+
+#dos a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#dos a:hover {
+    text-decoration: underline;
+}
+
+#menu{
+  background-color: #fcfcfc;
+}
+
+#salir{
+    margin-left: 50px;
+    margin-right: 10px;
+}
+
+.tuclase {
+    
+    
+    text-align: left; 
+    font-family: Arial Black; 
+    font-weight: bold; 
+    font-size: 30px; 
+    color: #548c49; 
+    text-shadow: 0 1px 0 #ddd, 0 2px 0 #ccc, 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 0 #acacac, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.2), 0 20px 20px rgba(0,0,0,0.15);
+    }
+
+
+#botones{
+    max-width: 370px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 450px;
+    margin-left: 480px;
+}
+#botones2{
+    max-width: 330px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 480px;
+}
+#botones3{
+    max-width: 210px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 1030px;
+}
+
+#botones5{
+    max-width: 200px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 1100px;
+}
+
+.fas.fa-eye {
+    margin-right: 8px; /* Ajusta el margen derecho según sea necesario para separar el icono del texto */
+    color: #0e5526; /* Puedes cambiar el color del icono */
+    font-size: 25px; /* Ajusta el tamaño del icono según sea necesario */
+}
+
+#arch{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 150px;
+  }
+  
+  .g-col-6 {
+    flex: 0 0 33%; /* Toma la mitad del ancho del contenedor padre */
+    max-width: 50%;
+    box-sizing: border-box;
+  }
+  
+  #cards1{
+    color: rgb(17, 141, 20);
+    font-size: 23px;
+  }
+
+#tituloh{
+    font-size: 25px;
+    text-align: center;
+    color: #0e722f;
+    
+}
+#titulop{
+color: #0f4e24;
+text-align: center;
+font: oblique bold 100% cursive;
+}
+
+#links{
+    margin-left: 1000px;
+}

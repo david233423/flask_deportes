@@ -1,0 +1,80 @@
+{% extends './base2.html' %}
+
+{% block title %}Lugar{% endblock %}
+
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Lugares de Juegos</h1>
+</header>
+<br>
+<div  id="botones3">
+    <button  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarLugarModal">
+        Agregar lugar
+    </button>
+</div>
+
+<div class="modal fade" id="agregarLugarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/agregar_lugar" method="POST"  enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Lugar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del Lugar</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Agregar Lugar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <h1>Lista de lugares</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for lugar in lugares %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ lugar.nombre }}</td>
+
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <span>
+        {{ pagination.info }}
+        <hr />
+      </span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >
+      {{ pagination.links }}
+    </div>
+  </div>
+{% endblock %}

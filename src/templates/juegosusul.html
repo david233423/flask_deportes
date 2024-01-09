@@ -1,0 +1,101 @@
+{% extends './base4.html' %}
+
+{% block title %}Inscritos{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <h1 id="header1">Inscritos</h1>
+</header>
+
+<div class="container">
+    <h1>Listado de juegos</h1>
+
+    <!-- Formulario de búsqueda -->
+    <form id="searchForm">
+        <input type="text"  id="buscar" name="buscar" placeholder="Nombre del juego">
+        <button type="button" class="btn btn-primary" onclick="buscarJuegos()">Buscar</button>
+    </form>
+
+    
+
+    <!-- Resultados de la búsqueda -->
+    
+
+    <!-- Tabla de juegos -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre del juego</th>
+                <th>Fecha</th>
+                <th>Hora Inicio</th>
+                <th>Hora Fin</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tbody id="resultados">
+            {% for juego in juegos %}
+                <tr>
+                    <td>{{ juego.nombre }}</td>
+                    <td>{{ juego.fecha }}</td>
+                    <td>{{ juego.horai }}</td>
+                    <td>{{juego.horaf }}</td>
+                    <td><a href="{{ url_for('inscritos_juego', id=juego.id) }}"><i class="fas fa-eye"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <span>
+        {{ pagination.info }}
+        <hr />
+      </span &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >
+      {{ pagination.links }}
+    </div>
+</div>
+
+<script>
+   function buscarJuegos() {
+    const buscar = document.getElementById('buscar').value;
+
+    // Hacer una solicitud a la API Flask
+    fetch(`/api/buscar_juegos?buscar=${buscar}`)
+        .then(response => response.json())
+        .then(data => {
+            const resultadosBody = document.getElementById('resultados');
+
+            // Limpiar resultados anteriores
+            resultadosBody.innerHTML = '';
+
+            // Mostrar los nuevos resultados
+            if (data.juegos) {
+                data.juegos.forEach(juego => {
+                    // Crear una nueva fila para cada juego
+                    const nuevaFila = document.createElement('tr');
+                    nuevaFila.innerHTML = `
+                        <td>${juego.nombre}</td>
+                        <td>${juego.fecha}</td>
+                        <td>${juego.horai}</td>
+                        <td>${juego.horaf}</td>
+                        <td><a href="${juego.ver_url}"><i class="fas fa-eye"></i></a></td>
+                    `;
+                    resultadosBody.appendChild(nuevaFila);
+                });
+            } else {
+                // Si no hay resultados, mostrar un mensaje
+                const nuevaFila = document.createElement('tr');
+                nuevaFila.innerHTML = `<td colspan="4">${data.mensaje || 'No hay resultados para la búsqueda.'}</td>`;
+                resultadosBody.appendChild(nuevaFila);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %}

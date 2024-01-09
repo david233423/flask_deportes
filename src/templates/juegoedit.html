@@ -1,0 +1,46 @@
+{% extends './base2.html' %}
+
+{% block title %}Juego{% endblock %}
+
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/noticias.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <h1 id="header1">Editar Juego</h1>
+</header>
+
+<form action="{{ url_for('editar_juego', id=juego.id) }}" method="POST" enctype="multipart/form-data">
+    <div >
+        <h5 >Editar Juego</h5>
+       
+    </div>
+    <div >
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Juego:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ juego.nombre }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="cupos" class="form-label">Cupos para el Juego:</label>
+            <input type="number" class="form-control" id="cupos" name="cupos" value="{{ juego.cupos }}" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción del Juego:</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" required>{{ juego.descripcion }}</textarea>
+        </div>
+        <div>
+            {% include 'taiwedit.html' %}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a type="button" class="btn btn-secondary" href="/eventos" >Cerrar</a>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </div>
+</form>
+
+{% endblock %}

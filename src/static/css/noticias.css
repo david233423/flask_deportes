@@ -1,0 +1,106 @@
+
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 36px;
+    margin: 0;
+    color: #0e5526;
+}
+
+#cont{
+    max-width: 1550px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+
+#article {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   
+}
+
+
+
+#article h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+#article p {
+    font-size: 16px;
+    margin: 10px 0;
+    
+}
+
+#article img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+#a{
+    color: #0e5526;
+    font-size: 20px;
+}
+
+#carouselExampleDark{
+    margin-left: 200px;
+}
+
+#article2{
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-left: 100px;
+}
+
+#article3{
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+   
+}
+#miDivFijo {
+    position: fixed;
+    top: 400px; /* Puedes ajustar la posición vertical */
+    left: 1100px; /* Puedes ajustar la posición horizontal */
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }

@@ -1,0 +1,5 @@
+2023-12-05 16:00:21,237 - my_flask_app - ERROR - Error en la ruta /lugar: 'Lugar' object has no attribute 'nombre_no_existente'
+2023-12-06 12:16:49,962 - my_flask_app - ERROR - Error en la ruta /lugar: 'Lugar' object has no attribute 'nombre_no_existente'
+2023-12-26 09:34:16,411 - my_flask_app - ERROR - Error en la ruta /lugar: 'Lugar' object has no attribute 'nombre_no_existente'
+2023-12-26 09:34:27,607 - my_flask_app - ERROR - Error en la ruta /lugar: 'Lugar' object has no attribute 'nombre_no_existente'
+2023-12-26 09:34:34,286 - my_flask_app - ERROR - Error en la ruta /lugar: 'Lugar' object has no attribute 'nombre_no_existente'
